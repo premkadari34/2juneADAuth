@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+<style>
+    .back {
+        background: #e2e2e2;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0%;
+    }
+
+    .div-center {
+        width: 650px;
+        height: 400px;
+        background-color: #fff;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        max-width: 100%;
+        max-height: 100%;
+        overflow: auto;
+        padding: 1em 2em;
+        border-bottom: 2px solid #ccc;
+        display: table;
+    }
+
+    div.content {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+   
+</style>
+<div class="back">
+
+
+    <div class="div-center">
+
+
+        <div class="content">
+
+
+            <img src="~/cssdata/monat-logo_web.png" width="200" height="30">
+            <h3>Purchase Requisition</h3>
+            <hr />
+            <form action="PrForm.html" id="requestForm">
+                <div class="form-group">
+                    <div class="btn btn-primary">
+                       
+                        @*<button type="button" class="btn btn-primary btn-sm" asp-controller="Home" asp-action="PurchaseRequisitionForm">Submit a Request</button>*@
+                        @Html.ActionLink("Submit a Request", "PurchaseRequisitionForm", "Home", null, new { @class = "btn btn-primary btn-sm" })
+                    </div>
+                    <br />
+                    <div>
+
+                    </div>
+                    <br />
+                    <div class="btn btn-primary">
+                        
+                        @Html.ActionLink("Track a Request", "TrackRequest", "Home", null, new { @class = "btn btn-primary btn-sm" })
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+
+
+    </div>
+</div>

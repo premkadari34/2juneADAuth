@@ -1,0 +1,280 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<style>
+
+
+    body {
+        font-family: 'Unicons', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        overflow-y: auto; /* Add this line to make the container scrollable */
+        height: 500px; /* Add a fixed height to the container */
+    }
+
+    header {
+        text-align: left;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 100px;
+    }
+
+    .fields {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .input-field {
+        width: calc(50% - 10px);
+        margin-bottom: 15px;
+        justify-content: space-between;
+    }
+
+        .input-field label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Unicons', sans-serif;
+        }
+
+    .item {
+        flex-direction: column;
+        margin-bottom: 15px;
+        display: grid; /* Change display to grid */
+        grid-template-columns: repeat(2, 1fr); /* Set two columns */
+        grid-gap: 10px; /* Add gap between grid items */
+    }
+
+
+        .item .input-field {
+            margin-bottom: 10px;
+            width: 100%; /* Set width to 100% for each grid item */
+            margin-right: 10px; /* Add margin-right for spacing between columns */
+        }
+
+        .item .remove-button {
+            cursor: pointer;
+            color: #ff0000;
+        }
+
+
+    .nextBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<!----======== CSS ======== -->
+
+<link rel="stylesheet" href="~/cssdata/style.css">
+<!----===== Iconscout CSS ===== -->
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+<title>Responsive Regisration Form </title>
+<body>
+    <div class="container">
+        <!-- <h1>Monat Global</h1> -->
+        <img src="~/cssdata/monat-logo_web.png" width="200" height="30">
+
+
+        <h2>Purchase Requisition Form</h2>
+
+        <form action="#">
+            <div class="form first">
+                <div class="details personal">
+                    <!-- <span class="title">Personal Details</span> -->
+                    <h3>Requisitioner Information</h3>
+                    <br>
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Email</label>
+                            <input type="text" placeholder="Enter your email" required>
+                        </div>
+
+
+                        <div class="input-field">
+                            <label>Cost Center</label>
+                            <input type="text" placeholder="Enter Cost Center" required>
+                        </div>
+                        <h3> Request Details</h3>
+
+                        <br>
+                        <br>
+                        <div class="fields" id="itemContainer">
+                            <!-- Item fields will be dynamically added here -->
+                        </div>
+
+                        <button type="button" onclick="addItem()">Add Item</button>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="submit">
+                        <span class="btnText">Submit</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+
+        let itemId = 0;
+
+        function addItem() {
+            const itemContainer = document.getElementById('itemContainer');
+
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('item');
+
+            const accountAssignmentLabel = document.createElement('label');
+            accountAssignmentLabel.innerText = 'Account Assignment Category';
+            itemDiv.appendChild(accountAssignmentLabel);
+
+            const accountAssignmentSelect = document.createElement('select');
+            const accountAssignmentOptions = ['K-Cost Center corresponding to Expense', 'A-Asset', 'F-Order for an event/project'];
+            accountAssignmentOptions.forEach(option => {
+                const accountAssignmentOption = document.createElement('option');
+                accountAssignmentOption.value = option;
+                accountAssignmentOption.text = option;
+                accountAssignmentSelect.appendChild(accountAssignmentOption);
+            });
+            itemDiv.appendChild(accountAssignmentSelect);
+
+
+
+
+            const plantLabel = document.createElement('label');
+            plantLabel.innerText = 'Plant';
+            itemDiv.appendChild(plantLabel);
+
+            const plantSelect = document.createElement('select');
+            const plantOptions = ['USA', 'CANADA'];
+            plantOptions.forEach(option => {
+                const plantOption = document.createElement('option');
+                plantOption.value = option;
+                plantOption.text = option;
+                plantSelect.appendChild(plantOption);
+            });
+            itemDiv.appendChild(plantSelect);
+
+            const MaterialCodeLabel = document.createElement('label');
+            MaterialCodeLabel.innerText = 'Material Code';
+            itemDiv.appendChild(MaterialCodeLabel);
+
+            const MaterialCodeInput = document.createElement('input');
+            MaterialCodeInput.setAttribute('type', 'text');
+            MaterialCodeInput.setAttribute('name', 'MaterialCode' + itemId);
+            MaterialCodeInput.setAttribute('placeholder', 'Enter Material Code');
+            itemDiv.appendChild(MaterialCodeInput);
+
+            const quantityLabel = document.createElement('label');
+            quantityLabel.innerText = 'Quantity';
+            itemDiv.appendChild(quantityLabel);
+
+            const quantityInput = document.createElement('input');
+            quantityInput.setAttribute('type', 'number');
+            quantityInput.setAttribute('name', 'quantity' + itemId);
+            quantityInput.setAttribute('placeholder', 'Enter quantity');
+            itemDiv.appendChild(quantityInput);
+
+            const valuationPriceLabel = document.createElement('label');
+            valuationPriceLabel.innerText = 'Valuation Price';
+            itemDiv.appendChild(valuationPriceLabel);
+
+            const valuationPriceInput = document.createElement('input');
+            valuationPriceInput.setAttribute('type', 'text');
+            valuationPriceInput.setAttribute('name', 'valuationPrice' + itemId);
+            valuationPriceInput.setAttribute('placeholder', 'Enter valuation price');
+            itemDiv.appendChild(valuationPriceInput);
+
+            const DeliveryDateLabel = document.createElement('label');
+            DeliveryDateLabel.innerText = 'DeliveryDate';
+            itemDiv.appendChild(DeliveryDateLabel);
+
+            const DeliveryDateInput = document.createElement('input');
+            DeliveryDateInput.setAttribute('type', 'date');
+            DeliveryDateInput.setAttribute('name', 'DeliveryDate' + itemId);
+            DeliveryDateInput.setAttribute('placeholder', 'Enter DeliveryDate');
+            itemDiv.appendChild(DeliveryDateInput);
+
+            const removeButton = document.createElement('span');
+            removeButton.classList.add('remove-button');
+            removeButton.innerHTML = '<i class="uil uil-trash"></i> Remove';
+            removeButton.addEventListener('click', () => {
+                itemDiv.remove();
+            });
+            itemDiv.appendChild(removeButton);
+
+            itemContainer.appendChild(itemDiv);
+
+            itemId++;
+        }
+        function createInput(type, name, placeholder) {
+            const input = document.createElement('input');
+            input.setAttribute('type', type);
+            input.setAttribute('name', name);
+            input.setAttribute('placeholder', placeholder);
+            return input;
+        }
+        const form = document.querySelector("form"),
+            nextBtn = form.querySelector(".nextBtn"),
+            backBtn = form.querySelector(".backBtn"),
+            allInput = form.querySelectorAll(".first input");
+
+
+        nextBtn.addEventListener("click", () => {
+            allInput.forEach(input => {
+                if (input.value != "") {
+                    form.classList.add('secActive');
+                } else {
+                    form.classList.remove('secActive');
+                }
+            })
+        })
+
+        backBtn.addEventListener("click", () => form.classList.remove('secActive'));
+
+
+    </script>
+</body>

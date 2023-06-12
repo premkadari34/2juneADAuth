@@ -1,0 +1,309 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model _2juneADAuth.Models.LRSUserDetailViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .back {
+        background: #e2e2e2;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0%;
+        overflow-y: auto;
+        
+    }
+
+    .div-center {
+        width: 650px;
+        height: 400px;
+        background-color: #fff;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        max-width: 100%;
+        max-height: 100%;
+        overflow: auto;
+        padding: 1em 2em;
+        border-bottom: 2px solid #ccc;
+        display: table;
+    }
+
+    div.content {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 100px;
+    }
+
+    .nextBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .item {
+        flex-direction: column;
+        margin-bottom: 15px;
+        display: grid; /* Change display to grid */
+        grid-template-columns: repeat(2, 1fr); /* Set two columns */
+        grid-gap: 10px; /* Add gap between grid items */
+    }
+
+    .input-field label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .item .remove-button {
+        cursor: pointer;
+        color: #ff0000;
+    }
+
+</style>
+<div class="back">
+
+   
+        <div class="div-center">
+
+
+            <div class="content">
+
+
+                <img src="~/cssdata/monat-logo_web.png" width="200" height="30">
+                <h3>Purchase Requisition Form</h3>
+                <hr />
+                <h5>Requisitioner Information</h5>
+                @*@using (Html.BeginForm("PurchaseRequisitionForm", "Home", FormMethod.Post, new { target = "_blank" }))*@
+                @using (Html.BeginForm("PurchaseRequisitionForm", "Home", FormMethod.Post))
+                {
+                    <form>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Full Name</label>
+                            <input type="text" class="form-control" id="FullName" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter your email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Cost Center</label>
+                            <input type="text" class="form-control" id="CostCenter" placeholder="Enter Cost Center">
+                        </div>
+
+                        <Br />
+                        @if (@ViewBag.LRSUserDataId != null)
+                        {
+                            <div class="alert alert-success" role="alert" id="successMessage">
+                                Your Details have been saved.
+
+                                Your order #[1234] has been sent to Admin for approval.
+
+
+                            </div>
+
+                        }
+
+                        <br />
+                        <h5> Request Details</h5>
+                        <br>
+                        <br>
+                        <div class="fields" id="itemContainer">
+                            <!-- Item fields will be dynamically added here -->
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-sm" style="float:right" onclick="addItem()">Add Item</button>
+                        </div>
+                        <br />
+                        <br />
+                        @*<input type="submit" value="Submit" class="btn btn-primary btn-sm" onclick="reset()" />*@
+                        @*<input type="submit" value="Submit" class="btn btn-primary btn-sm" onClick="GFG_click(this.id)" />*@
+                        <input type="submit" value="Submit" class="btn btn-primary btn-sm"/>
+                        @*<div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-sm" />
+                    </div>*@
+
+                        @*<button type="submit" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("PurchaseRequisitionForm", "Home")';return false;">Reset</button>*@
+
+                        @*<button type="submit" class="btn btn-primary btn-sm" onclick="myFunction() ">Submit</button>*@
+
+                        <button type="submit" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("PurchaseRequisitionForm", "Home")';return false;">Reset</button>
+                        <button type="submit" class="btn btn-primary btn-sm" style="float:right" onclick="location.href='@Url.Action("Index", "Home")';return false;">Back</button>
+                        @*<div class="btn btn-primary btn-sm">
+
+                    @*<button type="button" class="btn btn-primary btn-sm" asp-controller="Home" asp-action="PurchaseRequisitionForm">Submit a Request</button>*@
+                        @*@Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-primary btn-sm",@style = "float:right;" })*@
+                        @*</div>*@
+                    </form>
+
+                }
+
+
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+    
+</div>
+<script>
+    let itemId = 0;
+
+    function addItem() {
+
+        const itemContainer = document.getElementById('itemContainer');
+
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('item');
+
+        const accountAssignmentLabel = document.createElement('label');
+        accountAssignmentLabel.innerText = 'Account Assignment Category';
+        itemDiv.appendChild(accountAssignmentLabel);
+
+        const accountAssignmentSelect = document.createElement('select');
+        const accountAssignmentOptions = ['K-Cost Center corresponding to Expense', 'A-Asset', 'F-Order for an event/project'];
+        accountAssignmentOptions.forEach(option => {
+            const accountAssignmentOption = document.createElement('option');
+            accountAssignmentOption.value = option;
+            accountAssignmentOption.text = option;
+            accountAssignmentSelect.appendChild(accountAssignmentOption);
+        });
+        itemDiv.appendChild(accountAssignmentSelect);
+
+
+
+
+        const plantLabel = document.createElement('label');
+        plantLabel.innerText = 'Plant';
+        itemDiv.appendChild(plantLabel);
+
+        const plantSelect = document.createElement('select');
+        const plantOptions = ['USA', 'CANADA'];
+        plantOptions.forEach(option => {
+            const plantOption = document.createElement('option');
+            plantOption.value = option;
+            plantOption.text = option;
+            plantSelect.appendChild(plantOption);
+        });
+        itemDiv.appendChild(plantSelect);
+
+        const MaterialCodeLabel = document.createElement('label');
+        MaterialCodeLabel.innerText = 'Material Code';
+        itemDiv.appendChild(MaterialCodeLabel);
+
+        const MaterialCodeInput = document.createElement('input');
+        MaterialCodeInput.setAttribute('type', 'text');
+        MaterialCodeInput.setAttribute('name', 'MaterialCode' + itemId);
+        MaterialCodeInput.setAttribute('placeholder', 'Enter Material Code');
+        itemDiv.appendChild(MaterialCodeInput);
+
+        const quantityLabel = document.createElement('label');
+        quantityLabel.innerText = 'Quantity';
+        itemDiv.appendChild(quantityLabel);
+
+        const quantityInput = document.createElement('input');
+        quantityInput.setAttribute('type', 'number');
+        quantityInput.setAttribute('name', 'quantity' + itemId);
+        quantityInput.setAttribute('placeholder', 'Enter quantity');
+        itemDiv.appendChild(quantityInput);
+
+        const valuationPriceLabel = document.createElement('label');
+        valuationPriceLabel.innerText = 'Valuation Price';
+        itemDiv.appendChild(valuationPriceLabel);
+
+        const valuationPriceInput = document.createElement('input');
+        valuationPriceInput.setAttribute('type', 'text');
+        valuationPriceInput.setAttribute('name', 'valuationPrice' + itemId);
+        valuationPriceInput.setAttribute('placeholder', 'Enter valuation price');
+        itemDiv.appendChild(valuationPriceInput);
+
+        const DeliveryDateLabel = document.createElement('label');
+        DeliveryDateLabel.innerText = 'DeliveryDate';
+        itemDiv.appendChild(DeliveryDateLabel);
+
+        const DeliveryDateInput = document.createElement('input');
+        DeliveryDateInput.setAttribute('type', 'date');
+        DeliveryDateInput.setAttribute('name', 'DeliveryDate' + itemId);
+        DeliveryDateInput.setAttribute('placeholder', 'Enter DeliveryDate');
+        itemDiv.appendChild(DeliveryDateInput);
+
+        const removeButton = document.createElement('span');
+        removeButton.classList.add('remove-button');
+        removeButton.innerHTML = '<i class="uil uil-trash"></i> Remove';
+        removeButton.addEventListener('click', () => {
+            itemDiv.remove();
+        });
+        itemDiv.appendChild(removeButton);
+
+        itemContainer.appendChild(itemDiv);
+
+        itemId++;
+    }
+    function createInput(type, name, placeholder) {
+        const input = document.createElement('input');
+        input.setAttribute('type', type);
+        input.setAttribute('name', name);
+        input.setAttribute('placeholder', placeholder);
+        return input;
+    }
+    const form = document.querySelector("form"),
+        nextBtn = form.querySelector(".nextBtn"),
+        backBtn = form.querySelector(".backBtn"),
+        allInput = form.querySelectorAll(".first input");
+
+
+    nextBtn.addEventListener("click", () => {
+        allInput.forEach(input => {
+            if (input.value != "") {
+                form.classList.add('secActive');
+            } else {
+                form.classList.remove('secActive');
+            }
+        })
+    })
+
+    backBtn.addEventListener("click", () => form.classList.remove('secActive'));
+
+    function myFunction() {
+        document.getElementById('successMessage').style.display = 'block';
+        location.href = '@Url.Action("Index", "Home")'; return false;
+        event.preventDefault()
+    }
+    function GFG_click(clicked) {
+        document.getElementById('FullName').value = "";
+        document.getElementById('Email').value = "";    
+        document.getElementById('CostCenter').value = "";
+        itemContainer.remove();
+        const removeButton = document.createElement('span');
+        removeButton.remove();
+     }
+</script>

@@ -1,0 +1,175 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+<style>
+    .back {
+        background: #e2e2e2;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0%;
+        overflow-y: auto;
+    }
+
+    .div-center {
+        width: 650px;
+        height: 400px;
+        background-color: #fff;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        max-width: 100%;
+        max-height: 100%;
+        overflow: auto;
+        padding: 1em 2em;
+        border-bottom: 2px solid #ccc;
+        display: table;
+    }
+
+    div.content {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 100px;
+    }
+
+    .nextBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .item {
+        flex-direction: column;
+        margin-bottom: 15px;
+        display: grid; /* Change display to grid */
+        grid-template-columns: repeat(2, 1fr); /* Set two columns */
+        grid-gap: 10px; /* Add gap between grid items */
+    }
+
+    .input-field label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .item .remove-button {
+        cursor: pointer;
+        color: #ff0000;
+    }
+
+</style>
+
+<div class="back">
+
+
+    <div class="div-center">
+
+
+        <div class="content">
+
+            <div class="overflow-auto">
+                <img src="~/cssdata/monat-logo_web.png" width="200" height="30">
+                <hr />
+                <h5>Track Request Details</h5>
+                <hr />
+                <h6>User Requisitioner Information</h6>
+                @using (Html.BeginForm("AdminView", "Home", FormMethod.Post))
+                {
+                    <form>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Full Name</label>
+                            <input class="form-control" type="text" placeholder="Prem Kumar" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input class="form-control" type="text" placeholder="premkumark3434@gmail.com" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Cost Center</label>
+                            <input class="form-control" type="text" placeholder="C1212" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Account Assignment Category</label>
+                            <input class="form-control" type="text" placeholder="K-Cost Center corresponding to Expense" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Plant</label>
+                            <input class="form-control" type="text" placeholder="USA" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Material Code</label>
+                            <input class="form-control" type="text" placeholder="M1212" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Quantity</label>
+                            <input class="form-control" type="text" placeholder="10" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Valuation Price</label>
+                            <input class="form-control" type="text" placeholder="250" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">DeliveryDate</label>
+                            <input class="form-control" type="text" placeholder="06-Jun-2023" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Status</label>
+                            <input class="form-control" type="text" placeholder="Approved" readonly>
+                        </div>
+
+                        <Br />
+                        
+
+                        <br>
+                        <br />
+                        <br />
+                        
+                       
+
+                        <button type="submit" class="btn btn-primary btn-sm" style="float:right" onclick="location.href='@Url.Action("Index", "Home")';return false;">Back</button>
+                        
+                    </form>
+
+                }
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+    </div>
+</div>

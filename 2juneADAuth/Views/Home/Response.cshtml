@@ -1,0 +1,154 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<style>
+    .back {
+        background: #e2e2e2;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0%;
+        overflow-y: auto;
+    }
+
+    .div-center {
+        width: 650px;
+        height: 400px;
+        background-color: #fff;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        max-width: 100%;
+        max-height: 100%;
+        overflow: auto;
+        padding: 1em 2em;
+        border-bottom: 2px solid #ccc;
+        display: table;
+    }
+
+    div.content {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 100px;
+    }
+
+    .nextBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .item {
+        flex-direction: column;
+        margin-bottom: 15px;
+        display: grid; /* Change display to grid */
+        grid-template-columns: repeat(2, 1fr); /* Set two columns */
+        grid-gap: 10px; /* Add gap between grid items */
+    }
+
+    .input-field label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .item .remove-button {
+        cursor: pointer;
+        color: #ff0000;
+    }
+
+</style>
+
+<div class="back">
+
+
+    <div class="div-center">
+
+
+        <div class="content">
+
+            <div class="overflow-auto">
+                <img src="~/cssdata/monat-logo_web.png" width="200" height="30">
+                <hr />
+                <h5>We received your request</h5>
+                <hr />
+               
+                
+                
+            </div>
+            @if (@ViewBag.LRSUserDataId == "Submitted")
+            {
+                <div class="alert alert-success" role="alert" id="successMessage">
+                    Thank you for submitting the request, we have received your details and the same have been forwarded for approval.<br></br>
+                    This is your request number: 1234 <br></br>
+                    You can track this request after sometime for the updated status.
+                    <br></br>
+                    You can close this window.
+
+
+                </div>
+
+            }
+            @if (@ViewBag.LRSUserDataId == "Approve")
+            {
+                <div class="alert alert-success" role="alert" id="successMessage">
+                            
+                            Request has been Approved.
+
+                            order 1234 status Details sent to user Email id.
+
+
+                        </div>
+
+            }
+            @if (@ViewBag.LRSUserDataId == "Reject")
+            {
+                <div class="alert alert-success" role="alert" id="successMessage">
+                           Request has been Rejected.
+
+                            order 1234 status Details sent to user Email id.
+
+
+                        </div>
+
+            }
+
+            
+
+            <br />
+            <div>
+
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary btn-sm" style="float:right" onclick="location.href='@Url.Action("Index", "Home")';return false;">Back</button>
+
+        </div>
+
+        
+
+
+
+    </div>
+</div>
+
